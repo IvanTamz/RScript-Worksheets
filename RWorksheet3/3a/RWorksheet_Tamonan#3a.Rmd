@@ -1,103 +1,107 @@
 ---
-title: "RWorksheet-3a"
+title: "RWorksheet#3a"
 author: "Tamonan"
-date: "2024-09-30"
+date: "2024-10-07"
 output: pdf_document
 ---
+```{r, echo=TRUE}
 # 1. Using Vectors
-# 1.a First 11 letters from LETTERS vector
+# Built-in vectors: LETTERS contains uppercase letters and letters contains lowercase letters.
+LETTERS
+letters
+
+# 1.a Produce a vector that contains the first 11 letters.
 first_11_letters <- LETTERS[1:11]
-print(first_11_letters)
+first_11_letters
 
-# 1.b Odd numbered letters
+# 1.b Produce a vector that contains the odd-numbered letters.
 odd_letters <- LETTERS[seq(1, 26, 2)]
-print(odd_letters)
+odd_letters
 
-# 1.c Vowels from LETTERS
+# 1.c Produce a vector that contains the vowels.
 vowels <- LETTERS[c(1, 5, 9, 15, 21)]
-print(vowels)
+vowels
 
-# 1.d Last 5 lowercase letters from letters vector
-last_5_letters <- letters[22:26]
-print(last_5_letters)
+# 1.d Produce a vector that contains the last 5 lowercase letters.
+last_5_lowercase <- letters[22:26]
+last_5_lowercase
 
-# 1.e Letters between 15 and 24 in lowercase
-subset_letters <- letters[15:24]
-print(subset_letters)
+# 1.e Produce a vector that contains lowercase letters from 15th to 24th.
+lowercase_15_to_24 <- letters[15:24]
+lowercase_15_to_24
 
-# 2 Working with Temperature Data
-# 2.a Character vector for cities
+# 2. Create a vector(not a dataframe) with the average temperatures in April for Tuguegarao City, Manila, Iloilo City, Tacloban, Samal Island, and Davao City. The average temperatures in Celcius are 42, 39, 34, 34, 30, and 27 degrees.
+# 2.a Create a character vector for city names
 city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
-print(city)
+city
 
-# 2.b Temperature vector
+# 2.b Create a numeric vector for temperatures
 temp <- c(42, 39, 34, 34, 30, 27)
-print(temp)
+temp
 
-# 2.c Creating a data frame
-temp_data <- data.frame(City = city, Temperature = temp)
-print(temp_data)
+# 2.c Create a dataframe from city and temperature
+city_temp_df <- data.frame(City = city, Temperature = temp)
+city_temp_df
 
-# 2.d Renaming columns (already done in Part 2c, this step is redundant)
-# names(temp_data) <- c("City", "Temperature") 
-# No need to rename the columns since they were already set when creating the data frame
+# 2.d Rename the columns
+names(city_temp_df) <- c("City", "Temperature")
+city_temp_df
 
-# 2.e Print structure of data frame
-str(temp_data)
+# 2.e Print the structure of the dataframe
+str(city_temp_df)
 
-# 2.f Content of row 3 and row 4
-print(temp_data[3:4, ])
+# 2.f Get the content of row 3 and 4
+city_temp_df[3:4, ]
 
-# 2.g City with the highest and lowest temperature
-max_temp_city <- temp_data[which.max(temp_data$Temperature), "City"]
-min_temp_city <- temp_data[which.min(temp_data$Temperature), "City"]
+# 2.g Display the city with the highest and lowest temperature
+highest_temp_city <- city_temp_df[which.max(city_temp_df$Temperature), ]
+lowest_temp_city <- city_temp_df[which.min(city_temp_df$Temperature), ]
+highest_temp_city
+lowest_temp_city
 
-# Output the cities with the highest and lowest temperature
-cat("City with the highest temperature:", max_temp_city, "\n")
-cat("City with the lowest temperature:", min_temp_city, "\n")
-
-
-# MATRICES
-# 3.a Create a matrix with values from 1-8 and 11-14
-matrix_data <- matrix(c(1:8, 11:14), nrow=3, ncol=4)
-print(matrix_data)
+# 3. Using Matrices
+# 3.a Create a matrix from 1 to 8 and 11 to 14 with 4 columns and 3 rows
+matrix_data <- matrix(c(1:8, 11:14), nrow = 3, ncol = 4)
+matrix_data
 
 # 3.b Multiply the matrix by 2
-mult_matrix <- matrix_data * 2
-print(mult_matrix)
+matrix_mult_2 <- matrix_data * 2
+matrix_mult_2
 
-# 3.c Content of row 2
-print(matrix_data[2,])
+# 3.c Display the content of row 2
+matrix_data[2, ]
 
-# 3.d Display columns 3 and 4 in rows 1 and 2
-print(matrix_data[1:2, 3:4])
+# 3.d Display column 3 and column 4 in row 1 and row 2
+matrix_data[1:2, 3:4]
 
 # 3.e Display columns 2 and 3 in row 3
-print(matrix_data[3, 2:3])
+matrix_data[3, 2:3]
 
-# 3.f Display column 4
-print(matrix_data[, 4])
+# 3.f Display only column 4
+matrix_data[, 4]
 
-# 3.g Name rows and columns
-rownames(mult_matrix) <- c("isa", "dalawa", "tatlo")
-colnames(mult_matrix) <- c("uno", "dos", "tres", "quatro")
-print(mult_matrix)
+# 3.g Name the rows and columns of the matrix
+rownames(matrix_mult_2) <- c("isa", "dalawa", "tatlo")
+colnames(matrix_mult_2) <- c("uno", "dos", "tres", "quatro")
+matrix_mult_2
 
-# 3.g(2) Reshape matrix to 6 rows and 2 columns
-matrix_data <- matrix(c(1:8, 11:14), nrow=6, ncol=2)
-print(matrix_data)
+# 3.h Reshape the matrix to 2 columns and 6 rows
+dim(matrix_data) <- c(6, 2)
+matrix_data
 
-# ARRAYS
-# 4.a Create a 3D array with repeated values
-array_data <- array(rep(c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1), 2), dim=c(2, 4, 3))
-print(array_data)
+# 4. Using Arrays
+# 4.a Create a 3D array with 4 columns, 2 rows, and repeating values
+array_data <- array(rep(c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1), 2), dim = c(2, 4, 3))
+array_data
 
-# 4.b Check array dimensions
-print(dim(array_data))
+# 4.b Check the dimensions of the array
+dim(array_data)
 
-# 4.c Name rows, columns, and dimensions
-dimnames(array_data) <- list(letters[1:2], LETTERS[1:4], c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array"))
-print(array_data)
+# 4.c Name the rows and columns of the array
+rownames <- letters[1:2]
+colnames <- LETTERS[1:4]
+dimnames(array_data) <- list(rownames, colnames, c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array"))
+array_data
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

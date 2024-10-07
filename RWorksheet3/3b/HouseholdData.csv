@@ -1,0 +1,11 @@
+Respondent,Sex,Father_Occupation,Persons_at_Home,Siblings_at_School,Type_of_House
+1,Male,1,5,2,wood
+2,Female,2,7,3,congrete
+3,Female,3,3,0,congrete
+4,Male,3,8,5,wood
+5,Male,1,6,2,semi-congrete
+6,Female,2,4,3,semi-congrete
+7,Female,2,4,1,wood
+8,Male,3,2,2,semi-congrete
+9,Female,1,11,6,semi-congrete
+10,Male,3,6,2,congrete
