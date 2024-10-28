@@ -75,29 +75,89 @@ factor_directions_vector <- factor(directions_vector, levels = c("East", "West",
 print(factor_directions_vector)
 ```
 ```{r}
-# 5. 5.	Enter the data below in Excel with file name = import_march.csv
+# 5. Enter the data below in Excel with file name = import_march.csv
 read.table(file = "import_march.csv", header=TRUE, sep=",")
 
 ```
+```{r}
+# 6. Prompt the user for a number
+user_input <- readline(prompt = "Enter a number from 1 to 50: ")
 
+# Convert the input to a numeric value
+number <- as.numeric(user_input)
 
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+# Check conditions and display the appropriate message
+if (!is.na(number)) {
+  if (number == 20) {
+    cat("TRUE\n")
+  } else if (number >= 1 && number <= 50) {
+    cat("You entered:", number, "\n")
+  } else {
+    cat("The number selected is beyond the range of 1 to 50\n")
+  }
+} else {
+  cat("Invalid input. Please enter a number.\n")
+}
 ```
 
-## Including Plots
+```{r}
+# 7. Function to calculate the minimum number of bills
+min_bills <- function(price) {
+  bills <- c(1000, 500, 200, 100, 50)
+  count <- 0
+  
+# Calculate minimum bills
+  for (bill in bills) {
+    count <- count + (price %/% bill)
+    price <- price %% bill
+  }
+  
+  cat("Minimum number of bills needed:", count, "\n")
+}
 
-You can also embed plots, for example:
+price <- as.integer(readline(prompt = "Enter snack price (must be divisible by 50): "))
+min_bills(price)
 
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+# 8.a Create a dataframe for students' scores
+scores <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+print(scores)
+
+# 8.b Calculate averages and display students with averages over 90
+for (i in 1:nrow(scores)) {
+  student <- scores[i, ]
+  avg_score <- sum(student[2:5]) / 4
+  
+  if (avg_score > 90) {
+    cat(student$Name, "'s average grade this semester is", avg_score, "\n")
+  }
+}
+
+
+# 8.c Identify tests with average score below 80
+for (j in 2:5) {  # Iterate over Grade columns
+  test_avg <- sum(scores[[j]]) / nrow(scores)
+  
+  if (test_avg < 80) {
+    cat("The", j - 1, "test was difficult.\n")
+  }
+}
+
+# 8.d Output highest score for each student without using `max`
+for (i in 1:nrow(scores)) {
+  student <- scores[i, ]
+  highest_score <- sort(as.numeric(student[2:5]), decreasing = TRUE)[1]
+  
+  if (highest_score > 90) {
+    cat(student$Name, "'s highest grade this semester is", highest_score, "\n")
+  }
+}
+```
